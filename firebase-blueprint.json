@@ -1,0 +1,39 @@
+{
+  "entities": {
+    "Student": {
+      "title": "Student",
+      "description": "Information about a 12th standard student.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Full name of the student"
+        },
+        "registerNumber": {
+          "type": "string",
+          "description": "Academic register number"
+        },
+        "dateOfBirth": {
+          "type": "string",
+          "format": "date",
+          "description": "Date of birth"
+        },
+        "class": {
+          "type": "string",
+          "description": "Student class (12th Standard)"
+        },
+        "createdAt": {
+          "type": "object",
+          "description": "Timestamp when the record was created"
+        }
+      },
+      "required": ["name", "registerNumber", "dateOfBirth", "class", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/students/{studentId}": {
+      "schema": "Student",
+      "description": "Collection of student registrations"
+    }
+  }
+}

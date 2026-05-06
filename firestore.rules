@@ -1,0 +1,40 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isValidId(id) { 
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$'); 
+    }
+    
+    function isValidStudent(data) {
+      return data.keys().hasAll(['name', 'registerNumber', 'dateOfBirth', 'class', 'createdAt']) &&
+             data.keys().size() == 5 &&
+             data.name is string && data.name.size() > 0 && data.name.size() <= 200 &&
+             data.registerNumber is string && data.registerNumber.size() > 0 && data.registerNumber.size() <= 50 &&
+             data.dateOfBirth is string && data.dateOfBirth.size() > 0 &&
+             data.class == '12th Standard' &&
+             data.createdAt is timestamp;
+    }
+
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Student collection rules
+    match /students/{studentId} {
+      // Allow public creation of student records
+      allow create: if isValidStudent(request.resource.data);
+      
+      // Allow public reading for the "No login" admin panel
+      // In a production app, we would use Auth, but the user explicitly requested no login.
+      allow list, get: if true;
+      
+      // Allow deletion for admin features
+      allow delete: if true;
+      
+      // No updates needed for this simple portal based on requirement
+      allow update: if false;
+    }
+  }
+}
