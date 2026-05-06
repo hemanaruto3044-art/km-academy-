@@ -86,11 +86,12 @@ const App: React.FC = () => {
             onClick={() => setLogoTapCount(prev => prev + 1)}
           >
             <div className="w-24 h-24 rounded-full glass flex items-center justify-center p-2 neon-glow overflow-hidden group hover:scale-110 transition-transform duration-500">
-               <div className="w-full h-full rounded-full bg-sky-900/50 flex flex-col items-center justify-center border border-sky-400/30">
-                 <span className="text-3xl font-bold bg-gradient-to-b from-white to-sky-300 bg-clip-text text-transparent">KM</span>
-                 <div className="h-px w-8 bg-sky-400/50 my-1"></div>
-                 <span className="text-[8px] tracking-[0.2em] font-medium text-sky-200">ACADEMY</span>
-               </div>
+               <img 
+                 src="https://i.ibb.co/Tdjh4TX/file-00000000c01471fdb8b1dfd8ee1124ae.png" 
+                 alt="KM Academy Logo" 
+                 className="w-full h-full object-contain rounded-full"
+                 referrerPolicy="no-referrer"
+               />
             </div>
           </motion.div>
           
